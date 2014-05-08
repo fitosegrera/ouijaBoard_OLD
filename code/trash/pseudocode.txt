@@ -1,0 +1,23 @@
+PSEUDO CODE FOR OUIJA BOARD
+
+#Invoke the name of the soul
+	Listen to switches on the board.
+	if switch:
+		Store character related to that switch
+	else
+		wait...
+
+	typedCharacters = oldChar + newChar #(The sum of all the characters)
+
+	soulName = typedCharacters
+	search google (soulName)
+	if found: 
+		print "hello Im here"
+		wait for response from user (ask a question or type a word)
+	else
+		figure out a way to tell the user that the soul was not found...
+
+	if userTypeResponse:
+		search google (soulname + userTypeResponse)
+		Move the pointer to give an answer to user...	
+
