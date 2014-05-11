@@ -36,56 +36,87 @@ char = ''
 soulName = ''
 typeDone = 1
 searchState = 0
+countTime = 0
+countOuija = 0
 countH = 0
 countI = 0
 countT = 0
 countL = 0
 countE = 0
 countR = 0
-waiting = 0.2
+waiting = 1
 
 ########################################################
 ########################################################
 while (searchState == 0):
 
 	if(GPIO.input(4) ==1):
-		print('OUIJA')
-		countOuija = countOuija + 1
-		if countOuija == 1:
-			print soulName
-			countOuija = 0
-			time.sleep(waiting)
-			searchState = 1
+		if countTime <= 1:
+			countOuija = countOuija + 1
+			if countOuija == 1:
+				print('OUIJA')
+				print soulName
+				countOuija = 0
+				time.sleep(waiting)
+				searchState = 1
+				countH = 0
+				countI = 0
+				countT = 0
+				countL = 0
+				countE = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(17) == 1):
-		print('H')
-		char = 'H'
-		countH = countH + 1
-		if countH == 1:
-			soulName = soulName + char;
-			print soulName
-			countH = 0
-			time.sleep(waiting)
+		if countTime <= 1:
+			countH = countH + 1
+			if countH == 1:
+				print('H')
+				char = 'H'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countI = 0
+				countT = 0
+				countL = 0
+				countE = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(18) ==1):
-		print('I')
-		char = 'I'
-		countI = countI + 1
-		if countI == 1:
-			soulName = soulName + char;
-			print soulName
-			countI = 0
-			time.sleep(waiting)
+		if countTime <= 1:
+			countI = countI + 1
+			if countI == 1:
+				print('I')
+				char = 'I'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countH = 0
+				countT = 0
+				countL = 0
+				countE = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(27) == 1):
-		print('T')
-		char = 'T'
-		countT = countT + 1
-		if countT == 1:
-			soulName = soulName + char;
-			print soulName
-			countT = 0
-			time.sleep(waiting)
+		if countTime <= 1:
+			countT = countT + 1
+			if countT == 1:
+				print('T')
+				char = 'T'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countH = 0
+				countI = 0
+				countL = 0
+				countE = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(22) ==1):
 		print('L')
