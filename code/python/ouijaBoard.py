@@ -119,34 +119,55 @@ while (searchState == 0):
 				countTime = 0
 
 	if(GPIO.input(22) ==1):
-		print('L')
-		char = 'L'
-		countL = countL + 1
-		if countL == 1:
-			soulName = soulName + char;
-			print soulName
-			countL = 0
-			time.sleep(waiting)
+		if countTime <= 1:
+			countL = countL + 1
+			if countT == 1:
+				print('L')
+				char = 'L'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countH = 0
+				countI = 0
+				countT = 0
+				countE = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(23) == 1):
-		print('E')
-		char = 'E'
-		countE = countE + 1
-		if countE == 1:
-			soulName = soulName + char;
-			print soulName
-			countE = 0
-			time.sleep(waiting)
+		if countTime <= 1:
+			countE = countT + 1
+			if countE == 1:
+				print('E')
+				char = 'E'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countH = 0
+				countI = 0
+				countT = 0
+				countL = 0
+				countR = 0
+				countTime = 0
 
 	if(GPIO.input(25) == 1):
-		print('R')
-		char = 'R'
-		countR = countR + 1
-		if countR == 1:
-			soulName = soulName + char;
-			print soulName
-			countR = 0
-			time.sleep(waiting)			
+		if countTime <= 1:
+			countR = countR + 1
+			if countE == 1:
+				print('R')
+				char = 'R'
+				soulName = soulName + char;
+				print soulName
+				time.sleep(waiting)
+				countOuija = 0
+				countH = 0
+				countI = 0
+				countT = 0
+				countL = 0
+				countE = 0
+				countTime = 0			
 
 GPIO.cleanup()
 
