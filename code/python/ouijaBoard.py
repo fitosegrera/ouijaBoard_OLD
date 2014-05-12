@@ -16,6 +16,8 @@ import RPi.GPIO as GPIO
 import time
 import urllib
 import json as m_json
+from xgoogle.search import GoogleSearch
+import OSC
 
 ########################################################################################
 #When the board is turned ON it sets the position of the XY pointer to 0,0 coordinate...
@@ -46,6 +48,18 @@ countE = 0
 countR = 0
 waiting = 1
 
+send_address = '127.0.0.1', 9000
+c = OSC.OSCClient()
+c.connect( send_address ) # set the address for all following messages
+msgOuija = OSC.OSCMessage()
+msgOuija.setAddress("/OUIJA") # set OSC address
+msgH = OSC.OSCMessage()
+msgH.setAddress("/H")
+msgI = OSC.OSCMessage()
+msgI.setAddress("/I")
+#msg.append(44) # int
+#msg.append(4.5233) # float
+
 ########################################################
 ########################################################
 while (searchState == 0):
@@ -54,6 +68,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countOuija = countOuija + 1
 			if countOuija == 1:
+				msgOuija.append( "O" ) # string
+				c.send(msgOuija) # send it!
 				print('Invoking the soul of ' + soulName + '...')
 				countOuija = 0
 				time.sleep(waiting)
@@ -65,11 +81,13 @@ while (searchState == 0):
 				countE = 0
 				countR = 0
 				countTime = 0
-
+	
 	if(GPIO.input(17) == 1):
 		if countTime <= 1:
 			countH = countH + 1
 			if countH == 1:
+				msgH.append( "H" ) # string
+				c.send(msgH) # send it!
 				print('H')
 				char = 'H'
 				soulName = soulName + char;
@@ -82,11 +100,13 @@ while (searchState == 0):
 				countE = 0
 				countR = 0
 				countTime = 0
-
+	'''
 	if(GPIO.input(18) ==1):
 		if countTime <= 1:
 			countI = countI + 1
 			if countI == 1:
+				msg.append( "I" ) # string
+				c.send(msg) # send it!
 				print('I')
 				char = 'I'
 				soulName = soulName + char;
@@ -104,6 +124,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countT = countT + 1
 			if countT == 1:
+				msg.append( "T" ) # string
+				c.send(msg) # send it!
 				print('T')
 				char = 'T'
 				soulName = soulName + char;
@@ -121,6 +143,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countL = countL + 1
 			if countL == 1:
+				msg.append( "L" ) # string
+				c.send(msg) # send it!
 				print('L')
 				char = 'L'
 				soulName = soulName + char;
@@ -138,6 +162,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countE = countE + 1
 			if countE == 1:
+				msg.append( "E" ) # string
+				c.send(msg) # send it!
 				print('E')
 				char = 'E'
 				soulName = soulName + char;
@@ -156,6 +182,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countR = countR + 1
 			if countR == 1:
+				msg.append( "R" ) # string
+				c.send(msg) # send it!
 				print('R')
 				char = 'R'
 				soulName = soulName + char;
@@ -167,7 +195,8 @@ while (searchState == 0):
 				countT = 0
 				countL = 0
 				countE = 0
-				countTime = 0			
+				countTime = 0
+		'''			
 
 GPIO.cleanup()
 
@@ -175,7 +204,18 @@ GPIO.cleanup()
 ########################################################
 
 if searchState == 1:
+	#This code uses the xgoogle module
+	gs = GoogleSearch(soulName)
+	gs.results_per_page = 2
+	results = gs.get_results()
+	msg.append(results) # string
+	c.send(msg) # send it!
+	for res in results:
+		print res.title.encode('utf8')
+
+	#######################################################################################
 	
+	'''
 	########################################################################################
 	#wait for the name of the soul to be invoked and search it using the GOOGLE SEARCH API
 	countSoulName = 0
@@ -195,5 +235,5 @@ if searchState == 1:
 		print "THE SOUL IS NOT AVAILABLE"
 	else:
 		print "HELLO IM HERE"
-
+	'''
 	
