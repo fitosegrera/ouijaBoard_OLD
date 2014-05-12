@@ -39,6 +39,16 @@ void ouija::drawBoard(string title){
 		boardImgOuija.draw(0,0);
 	}else if (drawH == true){
 		boardImgH.draw(0,0);
+	}else if(drawI == true){
+		boardImgI.draw(0,0);
+	}else if (drawT == true){
+		boardImgT.draw(0,0);
+	}else if(drawL == true){
+		boardImgL.draw(0,0);
+	}else if (drawE == true){
+		boardImgE.draw(0,0);
+	}else if(drawR == true){
+		boardImgR.draw(0,0);
 	}
 	while(receiver.hasWaitingMessages()){
 	 	ofxOscMessage m;
@@ -49,18 +59,19 @@ void ouija::drawBoard(string title){
         	drawOuija = true;
         }else if ( m.getAddress() == "/H" ){
         	drawH = true;
-        }/*if ( argument == "I" ){
+        }if ( m.getAddress() == "/I" ){
         	drawI = true;
-        }if(argument == "T" ){
+        }else if ( m.getAddress() == "/T" ){
         	drawT = true;
-        }if ( argument == "L" ){
+        }if ( m.getAddress() == "/L" ){
         	drawL = true;
-        }if ( argument == "E" ){
+        }else if ( m.getAddress() == "/E" ){
         	drawE = true;
-        }if ( argument == "R" ){
+        }if ( m.getAddress() == "/R" ){
         	drawR = true;
-        }*/
-		//ofDrawBitmapString(title, 0, ofGetHeight() - 20);
+        }else if ( m.getAddress() == "/MESSAGE" ){
+        	ofDrawBitmapString(m.getArgAsString(20), 0, ofGetHeight() - 20);;
+        }
 	 }
 }
 //--------------------------------------------------------------

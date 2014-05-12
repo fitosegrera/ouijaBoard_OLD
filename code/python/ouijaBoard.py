@@ -57,6 +57,17 @@ msgH = OSC.OSCMessage()
 msgH.setAddress("/H")
 msgI = OSC.OSCMessage()
 msgI.setAddress("/I")
+msgT = OSC.OSCMessage()
+msgT.setAddress("/T")
+msgL = OSC.OSCMessage()
+msgL.setAddress("/L")
+msgE = OSC.OSCMessage()
+msgE.setAddress("/E")
+msgR = OSC.OSCMessage()
+msgR.setAddress("/R")
+msgMessage = OSC.OSCMessage()
+msgMessage.setAddress("/MESSAGE")
+
 #msg.append(44) # int
 #msg.append(4.5233) # float
 
@@ -100,13 +111,13 @@ while (searchState == 0):
 				countE = 0
 				countR = 0
 				countTime = 0
-	'''
+
 	if(GPIO.input(18) ==1):
 		if countTime <= 1:
 			countI = countI + 1
 			if countI == 1:
-				msg.append( "I" ) # string
-				c.send(msg) # send it!
+				msgI.append( "I" ) # string
+				c.send(msgI) # send it!
 				print('I')
 				char = 'I'
 				soulName = soulName + char;
@@ -124,8 +135,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countT = countT + 1
 			if countT == 1:
-				msg.append( "T" ) # string
-				c.send(msg) # send it!
+				msgT.append( "T" ) # string
+				c.send(msgT) # send it!
 				print('T')
 				char = 'T'
 				soulName = soulName + char;
@@ -143,8 +154,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countL = countL + 1
 			if countL == 1:
-				msg.append( "L" ) # string
-				c.send(msg) # send it!
+				msgL.append( "L" ) # string
+				c.send(msgL) # send it!
 				print('L')
 				char = 'L'
 				soulName = soulName + char;
@@ -162,8 +173,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countE = countE + 1
 			if countE == 1:
-				msg.append( "E" ) # string
-				c.send(msg) # send it!
+				msgE.append( "E" ) # string
+				c.send(msgE) # send it!
 				print('E')
 				char = 'E'
 				soulName = soulName + char;
@@ -182,8 +193,8 @@ while (searchState == 0):
 		if countTime <= 1:
 			countR = countR + 1
 			if countR == 1:
-				msg.append( "R" ) # string
-				c.send(msg) # send it!
+				msgR.append( "R" ) # string
+				c.send(msgR) # send it!
 				print('R')
 				char = 'R'
 				soulName = soulName + char;
@@ -195,8 +206,7 @@ while (searchState == 0):
 				countT = 0
 				countL = 0
 				countE = 0
-				countTime = 0
-		'''			
+				countTime = 0			
 
 GPIO.cleanup()
 
@@ -208,11 +218,12 @@ if searchState == 1:
 	gs = GoogleSearch(soulName)
 	gs.results_per_page = 2
 	results = gs.get_results()
-	msg.append(results) # string
-	c.send(msg) # send it!
+	msgMessage.append(results) # string
+	c.send(msgMessage) # send it!
 	for res in results:
 		print res.title.encode('utf8')
-
+		msgMessage.append(res.title.encode('utf8')) # string
+		c.send(res.title.encode('utf8')) # send it!
 	#######################################################################################
 	
 	'''
