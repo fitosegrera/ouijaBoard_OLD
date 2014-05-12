@@ -54,8 +54,7 @@ while (searchState == 0):
 		if countTime <= 1:
 			countOuija = countOuija + 1
 			if countOuija == 1:
-				print('OUIJA')
-				print soulName
+				print('Invoking the soul of ' + soulName + '...')
 				countOuija = 0
 				time.sleep(waiting)
 				searchState = 1
@@ -121,7 +120,7 @@ while (searchState == 0):
 	if(GPIO.input(22) ==1):
 		if countTime <= 1:
 			countL = countL + 1
-			if countT == 1:
+			if countL == 1:
 				print('L')
 				char = 'L'
 				soulName = soulName + char;
@@ -137,7 +136,7 @@ while (searchState == 0):
 
 	if(GPIO.input(23) == 1):
 		if countTime <= 1:
-			countE = countT + 1
+			countE = countE + 1
 			if countE == 1:
 				print('E')
 				char = 'E'
@@ -153,9 +152,10 @@ while (searchState == 0):
 				countTime = 0
 
 	if(GPIO.input(25) == 1):
+		countTime = countTime + 1
 		if countTime <= 1:
 			countR = countR + 1
-			if countE == 1:
+			if countR == 1:
 				print('R')
 				char = 'R'
 				soulName = soulName + char;
@@ -180,8 +180,8 @@ if searchState == 1:
 	#wait for the name of the soul to be invoked and search it using the GOOGLE SEARCH API
 	countSoulName = 0
 	print "////////////////////////////////////////////////////"
-	print "The name of the soul is: " + soulName 
-	print "////////////////////////////////////////////////////"
+	#print "The name of the soul is: " + soulName 
+	#print "////////////////////////////////////////////////////"
 	soulName = urllib.urlencode ( { 'q' : soulName } )
 	response = urllib.urlopen ( 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&' + soulName ).read()
 	jsonSoulName = m_json.loads ( response )
