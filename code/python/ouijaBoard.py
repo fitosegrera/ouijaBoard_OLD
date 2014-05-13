@@ -222,8 +222,8 @@ if searchState == 1:
 	c.send(msgMessage) # send it!
 	for res in results:
 		print res.title.encode('utf8')
-		msgMessage.append(res.title.encode('utf8')) # string
-		c.send(res.title.encode('utf8')) # send it!
+		#msgMessage.append(res.title.encode('utf8')) # string
+		#c.send(res.title.encode('utf8')) # send it!
 	#######################################################################################
 	
 	'''
