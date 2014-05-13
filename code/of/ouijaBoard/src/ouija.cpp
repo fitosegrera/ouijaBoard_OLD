@@ -9,6 +9,15 @@
 //--------------------------------------------------------------
 void ouija::setupBoard(){
 	ofBackground(0);
+	
+	drawOuija = false;
+	drawH = false;
+	drawI = false;
+	drawT = false;
+	drawL = false;
+	drawE = false;
+	drawR = false;
+		
 	boardImgBg.loadImage("bg.png");
 	boardImgOuija.loadImage("OUIJA.png");
 	boardImgH.loadImage("H.png");
@@ -28,16 +37,48 @@ void ouija::drawBoard(string title){
 	boardImgBg.draw(0,0);
 	if(drawOuija == true){
 		boardImgOuija.draw(0,0);
+	}if (drawH == true){
+		boardImgH.draw(0,0);
+	}if(drawI == true){
+		boardImgI.draw(0,0);
+	}if (drawT == true){
+		boardImgT.draw(0,0);
+	}if(drawL == true){
+		boardImgL.draw(0,0);
+	}if (drawE == true){
+		boardImgE.draw(0,0);
+	}if(drawR == true){
+		boardImgR.draw(0,0);
 	}
 	while(receiver.hasWaitingMessages()){
-	 	ofxOscMessage m;
-        receiver.getNextMessage( &m );
-        cout<< "New Message!" << endl;
-        argument = m.getArgAsString(0);
-        if ( argument == "H" ){
-        	drawOuija = true;
-        }
+		ofxOscMessage m;
+        	receiver.getNextMessage( &m );
+        	drawOuija = false;
+		drawH = false;
+		drawI = false;
+		drawT = false;
+		drawL = false;
+		drawE = false;
+		drawR = false;
+        	cout<< "New Message!" << endl;
+        	//argument = m.getArgAsString(0);
+        	if ( m.getAddress() == "/OUIJA" ){
+        		drawOuija = true;
+        	}else if ( m.getAddress() == "/H" ){
+        		drawH = true;
+        	}else if ( m.getAddress() == "/I" ){
+        		drawI = true;
+        	}else if ( m.getAddress() == "/T" ){
+        		drawT = true;
+        	}else if ( m.getAddress() == "/L" ){
+        		drawL = true;
+		}else if ( m.getAddress() == "/E" ){
+        		drawE = true;
+        	}else if ( m.getAddress() == "/R" ){
+        		drawR = true;
+        	}else if ( m.getAddress() == "/MESSAGE" ){
+        		//ofDrawBitmapString(m.getArgAsString(20), 0, ofGetHeight() - 20);;
+        	}
 	 }
-	//ofDrawBitmapString(title, ofGetWidth()/2, ofGetHeight()/5);
 }
 //--------------------------------------------------------------
